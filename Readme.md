@@ -1,6 +1,6 @@
-Author: Minh Nhat
-Date: 13/3/2024
-Desciprtion: Introduce Yocto project and how to build, flash A Yocto image for NXP board 
+Author: Minh Nhat  
+Date: 13/3/2024  
+Description: Introduce Yocto project and how to build, flash A Yocto image for NXP board  
 
 ## Table of contents
 
@@ -17,34 +17,34 @@ Ok. Let's get started
 
 ## Introduce concept of yocto project quickly
 
- What is Yocto project ?
-    - Yocto Project is an open source collaboration forcused on developing, flexible and customizable Linux embedded systems. 
-    Yocto project provide a collection of tools, metadata and development enviroments that allow developers to create the Linux distributions or customize for specific purposes 
-    - Input, output of yocto project:
-        + Input: Set of data that describes what you want, that is your specification (Kernel Config, Hardware name, Package/Binaries to be installed) 
-        + Output: Linux based Embedded Product (Bootloader,Linux Kernel Rootfs and device tree)
+What is Yocto project ?
+- Yocto Project is an open source collaboration forcused on developing, flexible and customizable Linux embedded systems. 
+Yocto project provide a collection of tools, metadata and development enviroments that allow developers to create the Linux distributions or customize for specific purposes 
+- Input, output of yocto project:
+    + Input: Set of data that describes what you want, that is your specification (Kernel Config, Hardware name, Package/Binaries to be installed) 
+    + Output: Linux based Embedded Product (Bootloader,Linux Kernel Rootfs and device tree)
 
- The compenents of yocto project
-    * Poky: It is a sample linux distribution of yocto. Yocto uses poky to build a Linux images(kernel, system, and application software) for targeted hardware
-    * OpenEmbedde-Core(OE-core): This is A tool collection used to build Linux embedded distributions
-    * Bitbake: A tool build an automatic distribution, it has ability build the software packages and distribution from an open source
-    * Meta-yocto-bsp: A (BSP) is a collection of information that defines how to support a particular hardware device, set of devices, or hardware platform
-    * Metadata: It refer to infomations describe, config and regulate for building, compiling and deploy system
-        Metadata is collection of
-            + Configuration (.conf)
-            + Recepies (.bb, .bbappend)
-            + Classes (.bbclass)
-            + Includes (.inc)
-    * Recipe: It is a set of instruction that decribe how to prepare or make some thing, especially a dish
-        + Etension of recipe: .bb
-        + A recipe decribes:
-            > Where you get source code
-            > which pathces options
-            > Configuration options
-            > Compile option (Library dependencies)
-            > Install
-            > License
-            Examples of recipes: dhcp_4.4.1.bb, gstreamer1.0_1.16.1.bb
+The compenents of yocto project
+* Poky: It is a sample linux distribution of yocto. Yocto uses poky to build a Linux images(kernel, system, and application software) for targeted hardware
+* OpenEmbedde-Core(OE-core): This is A tool collection used to build Linux embedded distributions
+* Bitbake: A tool build an automatic distribution, it has ability build the software packages and distribution from an open source
+* Meta-yocto-bsp: A (BSP) is a collection of information that defines how to support a particular hardware device, set of devices, or hardware platform
+* Metadata: It refer to infomations describe, config and regulate for building, compiling and deploy system
+Metadata is collection of
+    + Configuration (.conf)
+    + Recepies (.bb, .bbappend)
+    + Classes (.bbclass)
+    + Includes (.inc)
+* Recipe: It is a set of instruction that decribe how to prepare or make some thing, especially a dish
++ Etension of recipe: .bb
++ A recipe decribes:
+    > Where you get source code
+    > which pathces options
+    > Configuration options
+    > Compile option (Library dependencies)
+    > Install
+    > License
+    Examples of recipes: dhcp_4.4.1.bb, gstreamer1.0_1.16.1.bb
 ## Build and flash yocto image
 # Preparing:
     * A SSD disk at least 120GB
