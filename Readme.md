@@ -45,6 +45,8 @@ Yocto project provide a collection of tools, metadata and development enviroment
         Install
         License
         Examples of recipes: dhcp_4.4.1.bb, gstreamer1.0_1.16.1.bb
+* Classes: it used to abstract common functionality and share it amongst multiple recipe (.bb) file
+
 # Build and flash yocto image
 ## Preparing:
     * A SSD disk at least 120GB
@@ -53,29 +55,29 @@ Yocto project provide a collection of tools, metadata and development enviroment
 ## Host Setup
 Install the nessary packages to build yocto:
 ```
-$ sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential -y
-$ sudo apt install chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils -y
-$ sudo apt install iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev -y
-$ sudo apt install python3-subunit mesa-common-dev zstd liblz4-tool file locales -y
+$sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential -y
+$sudo apt install chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils -y
+$sudo apt install iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev -y
+$sudo apt install python3-subunit mesa-common-dev zstd liblz4-tool file locales -y
 ```
 Setting up the Repo utility:
 ```
-$ mkdir ~/bin (this step may not be needed if the bin folder already exists)
-$ curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-$ chmod a+x ~/bin/repo
-$ export PATH=~/bin:$PATH
+$mkdir ~/bin (this step may not be needed if the bin folder already exists)
+$curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+$chmod a+x ~/bin/repo
+$export PATH=~/bin:$PATH
 ```
 
 ## Yocto project setup
 First, make sure that Git is set up properly with the commands below:
 ```
-$ git config --global user.name "Your Name"
-$ git config --global user.email "Your Email"
-$ git config --list
-$ mkdir imx-yocto-bsp
-$ cd imx-yocto-bsp
-$ repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-mickledore -m imx-6.1.55-2.2.0.xml
-$ repo sync
+$git config --global user.name "Your Name"
+$git config --global user.email "Your Email"
+$git config --list
+$mkdir imx-yocto-bsp
+$cd imx-yocto-bsp
+$repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-mickledore -m imx-6.1.55-2.2.0.xml
+$repo sync
 ```
 
 ## Image Build
@@ -111,8 +113,8 @@ u-boot:
 > Please click with this link to check: https://github.com/AndroidCockpit/uboot-imx/commit/develop#
 
 ```
-$ cd ~imx-yocto-bsp/build-myir/tmp/work/imx8mm_ddr4_evk-poky-linux/u-boot-imx/2022.04-r0/git/arch/arm/dts
-$ nano imx8mm-evk.dtsi
+$cd ~imx-yocto-bsp/build-myir/tmp/work/imx8mm_ddr4_evk-poky-linux/u-boot-imx/2022.04-r0/git/arch/arm/dts
+$nano imx8mm-evk.dtsi
 ```
 > After modify code, let recompile with this command:
 
@@ -126,17 +128,25 @@ $bitbake imx-boot
 
 ```
 $cd imx-yocto-bsp/build-myir/tmp/work/imx8mm_ddr4_evk-poky-linux/linux-imx/5.15.71+gitAUTOINC+95448dd0dc-r0/git/arch/arm64/boot/dts/freescale
-$ nano imx8mm-evk.dtsi
+$nano imx8mm-evk.dtsi
 ```
 > After modify code, let recompile with this command:
 
 ```
 $bitbake linux-imx -c compile -f
 $bitbake linux-imx -c deploy
+```
+> Rebitbake to get image file .wic.zst after modfify code
+```
 $bitbake imx-image-core
 ```
 ## Flashing an SD card image 
-> An SD card image file .wic contains a partitioned image (with U-Boot, kernel, rootfs, etc.) suitable for booting the corresponding hardware.
++ Frist you need to format your sd card by gparted (if your machine don't have Gparted you can download with this command)
+```
+$sudo apt install gparted
+```
++ After you combine the card partition with the format ext4
+> An SD card image file .wic.zst contains a partitioned image (with U-Boot, kernel, rootfs, etc.) suitable for booting the corresponding hardware.
 ```
 $cd ~imx-yocto-bsp/build-myir/tmp/deploy/images/imx8mm-ddr4-evk
 ```
